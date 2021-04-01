@@ -2,17 +2,26 @@
 # Using CircuitPython 6.2.0-beta.4
 # Using Adafruit USB_HID Library
 
-# import time
+"""Example for Pico. Blinks the built-in LED."""
+import time
 import board
 import digitalio
 import usb_hid
 
-from adafruit_hid.keyboard import Keyboard
-from adafruit_hid.keyboard_layout_us import KeyboardLayoutUS
-from adafruit_hid.keycode import Keycode
+from adafruit_hid.gamepad import Gamepad
 
-keyboard = Keyboard(usb_hid.devices)
-keyboard_layout = KeyboardLayoutUS(keyboard)
+# checks if the pico is connected, could be removed later
+
+led = digitalio.DigitalInOut(board.LED)
+led.direction = digitalio.Direction.OUTPUT
+
+for x in range(0, 5):
+    led.value = False
+    time.sleep(0.1)
+    led.value = True
+    time.sleep(0.1)
+
+gamepad = Gamepad(usb_hid.devices)
 
 #frets
 btn_green = digitalio.DigitalInOut(board.GP2)
@@ -44,43 +53,36 @@ btn_dn = digitalio.DigitalInOut(board.GP15)
 btn_dn.direction = digitalio.Direction.INPUT
 btn_dn.pull = digitalio.Pull.DOWN
 
-#checks if the pico is connected, could be removed later
-led = digitalio.DigitalInOut(board.LED)
-led.direction = digitalio.Direction.OUTPUT
-led.value = True
-
+# maybe use an list of buttons instead of this jumbled if-else mess
 while True:
     #Fret Buttons,
     if btn_green.value:
-        keyboard.press(Keycode.ONE)
+        gamepad.press_buttons(1)
     if btn_green.value is False:
-        keyboard.release(Keycode.ONE)
+        gamepad.release_buttons(1)
     if btn_red.value:
-        keyboard.press(Keycode.TWO)
+        gamepad.press_buttons(2)
     if btn_red.value is False:
-        keyboard.release(Keycode.TWO)
+        gamepad.release_buttons(2)
     if btn_yellow.value:
-        keyboard.press(Keycode.THREE)
+        gamepad.press_buttons(3)
     if btn_yellow.value is False:
-        keyboard.release(Keycode.THREE)
+        gamepad.release_buttons(3)
     if btn_blue.value:
-        keyboard.press(Keycode.FOUR)
+        gamepad.press_buttons(4)
     if btn_blue.value is False:
-        keyboard.release(Keycode.FOUR)
+        gamepad.release_buttons(4)
     if btn_orange.value:
-        keyboard.press(Keycode.FIVE)
+        gamepad.press_buttons(5)
     if btn_orange.value is False:
-        keyboard.release(Keycode.FIVE)
+        gamepad.release_buttons(5)
     #Strum Bar
     #consider using time.sleep
     if btn_up.value:
-        keyboard.press(Keycode.UP_ARROW)
+        gamepad.press_buttons(6)
     if btn_up.value is False:
-        keyboard.release(Keycode.UP_ARROW)
+        gamepad.release_buttons(6)
     if btn_dn.value:
-        keyboard.press(Keycode.UP_ARROW)
+        gamepad.press_buttons(7)
     if btn_dn.value is False:
-        keyboard.release(Keycode.UP_ARROW)
-
-
-
+        gamepad.release_buttons(7)
