@@ -1,3 +1,4 @@
+# Arlan Prado, Hamza Sayyid
 # Raspberry Pi Pico Keyboard Controller for Clone Hero
 # Using CircuitPython 6.2.0-beta.4
 # Using Adafruit USB_HID Library
@@ -15,11 +16,11 @@ from adafruit_hid.gamepad import Gamepad
 led = digitalio.DigitalInOut(board.LED)
 led.direction = digitalio.Direction.OUTPUT
 
-for x in range(0, 5):
+for x in range(0, 3):
+    time.sleep(0.1)
     led.value = False
     time.sleep(0.1)
     led.value = True
-    time.sleep(0.1)
 
 gamepad = Gamepad(usb_hid.devices)
 
@@ -45,44 +46,37 @@ btn_orange.direction = digitalio.Direction.INPUT
 btn_orange.pull = digitalio.Pull.DOWN
 
 #strum bar
-btn_up = digitalio.DigitalInOut(board.GP14)
+btn_up = digitalio.DigitalInOut(board.GP7)
 btn_up.direction = digitalio.Direction.INPUT
 btn_up.pull = digitalio.Pull.DOWN
 
-btn_dn = digitalio.DigitalInOut(board.GP15)
-btn_dn.direction = digitalio.Direction.INPUT
-btn_dn.pull = digitalio.Pull.DOWN
+btn_down = digitalio.DigitalInOut(board.GP8)
+btn_down.direction = digitalio.Direction.INPUT
+btn_down.pull = digitalio.Pull.DOWN
 
-# maybe use an list of buttons instead of this jumbled if-else mess
+#misc. buttons
+btn_star = digitalio.DigitalInOut(board.GP9)
+btn_star.direction = digitalio.Direction.INPUT
+btn_star.pull = digitalio.Pull.DOWN
+
+btn_plus = digitalio.DigitalInOut(board.GP10)
+btn_plus.direction = digitalio.Direction.INPUT
+btn_plus.pull = digitalio.Pull.DOWN
+
+btn_minus = digitalio.DigitalInOut(board.GP11)
+btn_minus.direction = digitalio.Direction.INPUT
+btn_minus.pull = digitalio.Pull.DOWN
+
+#button dictionary to the gamepad buttons
+#current problem: want btn_plus and btn_minus to be the same button press. not possible on dictionary
+#cannot put btn as key, must be simple immutable datatype
+buttons = {5 : btn_green, 2 : btn_red, 6 : btn_yellow, 1 : btn_blue,
+9 : btn_orange, 3 : btn_star, 4 : btn_plus, 7 : btn_minus, 13 : btn_up, 14 : btn_down}
+
 while True:
-    #Fret Buttons,
-    if btn_green.value:
-        gamepad.press_buttons(1)
-    if btn_green.value is False:
-        gamepad.release_buttons(1)
-    if btn_red.value:
-        gamepad.press_buttons(2)
-    if btn_red.value is False:
-        gamepad.release_buttons(2)
-    if btn_yellow.value:
-        gamepad.press_buttons(3)
-    if btn_yellow.value is False:
-        gamepad.release_buttons(3)
-    if btn_blue.value:
-        gamepad.press_buttons(4)
-    if btn_blue.value is False:
-        gamepad.release_buttons(4)
-    if btn_orange.value:
-        gamepad.press_buttons(5)
-    if btn_orange.value is False:
-        gamepad.release_buttons(5)
-    #Strum Bar
-    #consider using time.sleep
-    if btn_up.value:
-        gamepad.press_buttons(6)
-    if btn_up.value is False:
-        gamepad.release_buttons(6)
-    if btn_dn.value:
-        gamepad.press_buttons(7)
-    if btn_dn.value is False:
-        gamepad.release_buttons(7)
+    for gamenum, button in buttons.items():
+        if button.value:
+            gamepad.press_buttons(gamenum)
+        else:
+            gamepad.release_buttons(gamenum)
+
