@@ -1,9 +1,7 @@
-# Arlan Prado, Hamza Sayyid
 # Raspberry Pi Pico Keyboard Controller for Clone Hero
-# Using CircuitPython 6.2.0-beta.4
+# Using CircuitPython 6.2.0-rc.0
 # Using Adafruit USB_HID Library
 
-"""Example for Pico. Blinks the built-in LED."""
 import time
 import board
 import digitalio
