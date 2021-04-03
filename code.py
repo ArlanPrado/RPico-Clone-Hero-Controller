@@ -70,9 +70,13 @@ ana_whammy = AnalogIn(board.GP26)
 
 # button dictionary to the gamepad buttons
 # current problem: want btn_plus and btn_minus to be the same button press. not possible
-#   on dictionary
+#   on dictionary. 
 
-# cannot put btn as key, must be simple immutable datatype
+# I think it possible. You can just add in the dictionary = {button_number: [btn_plus, btn_minus]}
+# Then you'd have to iterate it differently and check if the value is a list and etc. 
+# Might not be elegant, but should be possible.
+
+# cannot put btn as key, must be simple immutable datatype and hashable!
 buttons = {5 : btn_green, 2 : btn_red, 6 : btn_yellow, 1 : btn_blue,
 9 : btn_orange, 3 : btn_star, 4 : btn_plus, 7 : btn_minus, 13 : btn_up, 14 : btn_down}
 
