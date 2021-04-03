@@ -68,6 +68,10 @@ btn_minus.pull = digitalio.Pull.DOWN
 # whammy
 ana_whammy = AnalogIn(board.GP26)
 
+# joystick
+ana_joy_x = AnalogIn(board.GP28)
+ana_joy_y = AnalogIn(board.GP27)
+
 # button dictionary to the gamepad buttons
 # current problem: want btn_plus and btn_minus to be the same button press. not possible
 #   on dictionary
@@ -82,6 +86,9 @@ while True:
             gamepad.press_buttons(gamenum)
         else:
             gamepad.release_buttons(gamenum)
-
+    # the limit on each analog stick is by the first value
     # make limit -127 to 127
-    gamepad.move_joysticks(None, None, int(ana_whammy.value/65520 * 127 * 2 - 127), None)
+    gamepad.move_joysticks(int(ana_joy_x.value/64000 * 127 * 2 - 127),
+    int(ana_joy_y.value/65000 * 127 * 2 - 127),
+    int(ana_whammy.value/65520 * 127 * 2 - 127), None)
+
