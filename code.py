@@ -8,7 +8,7 @@ import digitalio
 import usb_hid
 
 from adafruit_hid.gamepad import Gamepad
-
+from analogio import AnalogIn
 # checks if the pico is connected, could be removed later
 
 led = digitalio.DigitalInOut(board.LED)
@@ -22,7 +22,7 @@ for x in range(0, 3):
 
 gamepad = Gamepad(usb_hid.devices)
 
-#frets
+# frets
 btn_green = digitalio.DigitalInOut(board.GP2)
 btn_green.direction = digitalio.Direction.INPUT
 btn_green.pull = digitalio.Pull.DOWN
@@ -43,7 +43,7 @@ btn_orange = digitalio.DigitalInOut(board.GP6)
 btn_orange.direction = digitalio.Direction.INPUT
 btn_orange.pull = digitalio.Pull.DOWN
 
-#strum bar
+# strum bar
 btn_up = digitalio.DigitalInOut(board.GP7)
 btn_up.direction = digitalio.Direction.INPUT
 btn_up.pull = digitalio.Pull.DOWN
@@ -52,7 +52,7 @@ btn_down = digitalio.DigitalInOut(board.GP8)
 btn_down.direction = digitalio.Direction.INPUT
 btn_down.pull = digitalio.Pull.DOWN
 
-#misc. buttons
+# misc. buttons
 btn_star = digitalio.DigitalInOut(board.GP9)
 btn_star.direction = digitalio.Direction.INPUT
 btn_star.pull = digitalio.Pull.DOWN
@@ -65,9 +65,14 @@ btn_minus = digitalio.DigitalInOut(board.GP11)
 btn_minus.direction = digitalio.Direction.INPUT
 btn_minus.pull = digitalio.Pull.DOWN
 
-#button dictionary to the gamepad buttons
-#current problem: want btn_plus and btn_minus to be the same button press. not possible on dictionary
-#cannot put btn as key, must be simple immutable datatype
+# whammy
+ana_whammy = AnalogIn(board.GP26)
+
+# button dictionary to the gamepad buttons
+# current problem: want btn_plus and btn_minus to be the same button press. not possible
+#   on dictionary
+
+# cannot put btn as key, must be simple immutable datatype
 buttons = {5 : btn_green, 2 : btn_red, 6 : btn_yellow, 1 : btn_blue,
 9 : btn_orange, 3 : btn_star, 4 : btn_plus, 7 : btn_minus, 13 : btn_up, 14 : btn_down}
 
@@ -78,3 +83,5 @@ while True:
         else:
             gamepad.release_buttons(gamenum)
 
+    # make limit -127 to 127
+    gamepad.move_joysticks(None, None, int(ana_whammy.value/65520 * 127 * 2 - 127), None)
