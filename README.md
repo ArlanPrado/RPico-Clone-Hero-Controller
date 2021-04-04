@@ -22,7 +22,7 @@ You should have (ana_whammy.value-30000)/25000. Replace the previous value with 
 
 Make sure to save the code! The pico should light up if it works.
 
-4. Connect your Pico with the controller buttons and analog sticks you want to use (pico diagram is included). Basic circuitry knowledge is recommended. Use a soldering iron, solder wick (in case of mistakes), wire (26AWG<), dupont jumper wires (male to female), and switches. I used Kailh Choc Reds for frets and BOX Navies for the strumbar, but keeping the original ALPS switches should be fine too!
+4. Connect your Pico with the controller buttons and analog sticks you want to use (pico diagram is included). Basic circuitry knowledge is recommended. Use a soldering iron, solder wick (in case of mistakes), wire (26AWG<), dupont jumper wires (male to female), super glue/hot glue, and switches. I used Kailh Choc Reds for frets and BOX Navies for the strumbar, but keeping the original ALPS switches should be fine too!
 
 5. To test out the controller search "Set Up USB game controllers" on Windows and select CircuitPython HID. You should be able to see all the buttons you connected working.
 
