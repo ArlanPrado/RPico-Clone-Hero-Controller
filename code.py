@@ -74,13 +74,9 @@ ana_joy_y = AnalogIn(board.GP27)
 
 # button dictionary to the gamepad buttons
 # current problem: want btn_plus and btn_minus to be the same button press. not possible
-#   on dictionary. 
+#   on dictionary
 
-# I think it possible. You can just add in the dictionary = {button_number: [btn_plus, btn_minus]}
-# Then you'd have to iterate it differently and check if the value is a list and etc. 
-# Might not be elegant, but should be possible.
-
-# cannot put btn as key, must be simple immutable datatype and hashable!
+# cannot put btn as key, must be simple immutable datatype
 buttons = {5 : btn_green, 2 : btn_red, 6 : btn_yellow, 1 : btn_blue,
 9 : btn_orange, 3 : btn_star, 4 : btn_plus, 7 : btn_minus, 13 : btn_up, 14 : btn_down}
 
@@ -90,9 +86,15 @@ while True:
             gamepad.press_buttons(gamenum)
         else:
             gamepad.release_buttons(gamenum)
+
     # the limit on each analog stick is by the first value
     # make limit -127 to 127
+    # adjust your joystick until limits are -127 to 127
+
     gamepad.move_joysticks(int(ana_joy_x.value/64000 * 127 * 2 - 127),
     int(ana_joy_y.value/65000 * 127 * 2 - 127),
-    int(ana_whammy.value/65520 * 127 * 2 - 127), None)
+    int((ana_whammy.value-30000)/25000 * 127 * 2 - 127), None)
+
+    #time.sleep(0.1)
+    #print(((ana_whammy.value-30000)/25000))
 
