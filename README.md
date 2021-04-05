@@ -20,6 +20,8 @@ Next "print(ana_whammy.value-30,000)"
 If the maximum value of the whammy bar is around 24,000 go to at most 25,000.
 You should have (ana_whammy.value-30000)/25000. Replace the previous value with this operation.
 
+**NOTE: The gamepad.move_joysticks values must be between -127 to 127, the code will not run if the values are outside this range. If you are getting this error, comment out the line and configure your joysticks as said in step 3**
+
 Make sure to save the code! The pico should light up if it works.
 
 4. Connect your Pico with the controller buttons and analog sticks you want to use (pico diagram is included). Basic circuitry knowledge is recommended. Use a soldering iron, solder wick (in case of mistakes), wire (26AWG<), dupont jumper wires (male to female), super glue/hot glue, and switches. I used Kailh Choc Reds for frets and BOX Navies for the strumbar, but keeping the original ALPS switches should be fine too!
