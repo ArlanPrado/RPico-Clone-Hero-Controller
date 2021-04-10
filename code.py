@@ -80,6 +80,17 @@ ana_joy_y = AnalogIn(board.GP27)
 buttons = {5 : btn_green, 2 : btn_red, 6 : btn_yellow, 1 : btn_blue,
 9 : btn_orange, 3 : btn_star, 4 : btn_plus, 7 : btn_minus, 13 : btn_up, 14 : btn_down}
 
+def setToJoyStickRange(stickVal):
+    return int(stickVal * 127 * 2 -127)
+
+def whammyDeadZone(whammyVal):
+    whammyDeadZoneVal = -90
+    whammyVal = setToJoyStickRange(whammyVal)
+    if(whammyVal < whammyDeadZoneVal):
+        return whammyDeadZoneVal
+    else:
+        return whammyVal
+
 while True:
     for gamenum, button in buttons.items():
         if button.value:
@@ -91,9 +102,9 @@ while True:
     # make limit -127 to 127
     # adjust your joystick until limits are -127 to 127
 
-    gamepad.move_joysticks(int(ana_joy_x.value/64000 * 127 * 2 - 127),
-    int(ana_joy_y.value/65000 * 127 * 2 - 127),
-    int((ana_whammy.value-30000)/25000 * 127 * 2 - 127), None)
+    gamepad.move_joysticks(setToJoyStickRange(ana_joy_x.value/64000),
+    setToJoyStickRange(ana_joy_y.value/65000),
+    whammyDeadZone((ana_whammy.value-30000)/25000), None)
 
     #time.sleep(0.1)
     #print(((ana_whammy.value-30000)/25000))
