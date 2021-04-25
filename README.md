@@ -8,7 +8,7 @@ CircuitPython v6.2.0-rc.0 + adafruit_hid library
 
 1. Connect your Raspberry Pico to your pc and load into it CircuitPython.
 
-2. Have code.py and adafruit_hid library downloaded. Load code.py into circuitpy and adafruit_hid into the "lib" folder.
+2. Have code.py, circuitpython, and adafruit_hid library downloaded. First load circuitpython into the pico. Then load code.py into circuitpy and adafruit_hid into the "lib" folder.
 
 [If you don't care about configuring the whammy and joystick skip this step]
 
