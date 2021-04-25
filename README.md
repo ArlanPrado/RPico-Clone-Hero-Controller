@@ -45,3 +45,7 @@ Make sure to save the code! The pico should light up if it works.
 [How to use CircuitPython with Raspberry Pi Pico](https://dronebotworkshop.com/pi-pico-circuitpython/)
 
 [Guitar Hero USB Controller w/Arduino and Java](https://www.instructables.com/Guitar-Hero-USB-Controller-With-Arduino/)
+
+### My Tutorial
+
+https://www.youtube.com/watch?v=6obtE-2q8-k
