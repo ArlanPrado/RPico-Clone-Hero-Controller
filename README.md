@@ -1,5 +1,5 @@
 # Raspberry Pico Guitar Hero Controller
- Clone/Guitar Hero guitar controller made with using Raspberry Pi Pico and CircuitPython. Make anything a Guitar Hero controller!
+ Clone/Guitar Hero guitar controller made with using Raspberry Pi Pico and CircuitPython. Make anything a Guitar Hero controller! Currently no support for a tilt to activate star power.
 
 CircuitPython v6.2.0-rc.0 + adafruit_hid library
 
